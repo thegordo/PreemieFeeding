@@ -6,7 +6,6 @@ import java.util.List;
 import org.jlawrence.ft.model.db.Feed;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 public interface FeedRepo extends PagingAndSortingRepository<Feed, Long> {
 
