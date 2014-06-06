@@ -8,7 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "feed", path = "feed")
 public interface FeedRepo extends PagingAndSortingRepository<Feed, Long> {
 
   List<Feed> findByDate(@Param("date") Date date);

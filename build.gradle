@@ -27,7 +27,7 @@ dependencies {
   compile("org.springframework.boot:spring-boot-starter-data-jpa")
   compile("com.h2database:h2")
   compile("org.springframework.data:spring-data-rest-webmvc")
-  compile('javax:javaee-api:6.0')
+
 }
 
 task wrapper(type: Wrapper) {
