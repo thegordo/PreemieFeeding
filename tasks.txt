@@ -1,4 +1,4 @@
-1. Add ability to delete entries (for mistakes)
+(complete) 1. Add ability to delete entries (for mistakes)
 2. Add ability to add a days worth feeding
 3.   Split out the css and javascript so that it can be used by more than one page.
 4.   create bulk page
