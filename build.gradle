@@ -13,7 +13,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-  baseName = 'gs-accessing-data-rest'
+  baseName = 'FeedingTracker'
   version = '0.1.0'
 }
 

@@ -1,15 +1,19 @@
  package org.jlawrence.ft.web;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 
 import org.jlawrence.ft.model.db.Feed;
 import org.jlawrence.ft.model.repo.FeedRepo;
 import org.jlawrence.ft.model.util.Serializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,9 +35,8 @@ public class FeedController {
 
   @RequestMapping(value = "/feed/{date}", method = RequestMethod.GET)
   @ResponseBody
-  public HttpEntity<List<Feed>> getFeedByDate(@PathVariable("date") String date) {
+  public ResponseEntity<List<Feed>> getFeedByDate(@PathVariable("date") String date) {
     try {
-      System.out.println("Date received: " + date);
       Date parsed = Serializer.dateFormat.parse(date);
 
       List<Feed> feeds = repo.findByDate(parsed);
@@ -44,11 +47,15 @@ public class FeedController {
     }
   }
 
-  @RequestMapping(value = "/feed", method = RequestMethod.POST, consumes = "application/json")
-  public HttpEntity saveFeeding(@RequestBody Feed feed) {
-    System.out.println("Saving feed:" + feed);
-    repo.save(feed);
-    return new ResponseEntity(HttpStatus.OK);
+  @RequestMapping(value = "/feed", method = RequestMethod.POST)
+  public ResponseEntity<String> saveFeeding(@RequestBody Feed feed) {
+    try {
+      repo.save(feed);
+      return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+    catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
 

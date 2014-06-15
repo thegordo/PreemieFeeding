@@ -28,6 +28,9 @@ public class Feed {
   private Long totalAmount;
 
   @Column
+  private Integer number;
+
+  @Column
   @Temporal(TemporalType.DATE)
   @JsonSerialize(using = JacksonDateSerializer.class)
   @JsonDeserialize(using = JacksonDateDeserializer.class)
@@ -65,12 +68,21 @@ public class Feed {
     this.totalAmount = totalAmount;
   }
 
+  public Integer getNumber() {
+    return number;
+  }
+
+  public void setNumber(Integer number) {
+    this.number = number;
+  }
+
   @Override
   public String toString() {
     return "Feed{" +
       "id=" + id +
       ", cavagedAmount=" + cavagedAmount +
       ", date=" + date +
+      ", number=" + number +
       '}';
   }
 }
