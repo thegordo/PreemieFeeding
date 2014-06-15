@@ -93,7 +93,14 @@
     }
 
     function deleteFeed(id) {
-        sendGetXmlHttpRequest("/feed?id="+id, updateDailySummary);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)            {
+                getDailySummary();
+            }
+        };
+        xmlhttp.open("DELETE", "/feed?id="+id, true);
+        xmlhttp.send();
     }
 
     function getDailySummary() {
