@@ -1,13 +1,8 @@
  package org.jlawrence.ft.web;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 
 import org.jlawrence.ft.model.db.Feed;
