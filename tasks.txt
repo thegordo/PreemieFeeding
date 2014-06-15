@@ -1,5 +1,5 @@
-Add ability to delete entries (for mistakes)
-Add ability to add a days worth feeding
-  Split out the css and javascript so that it can be used by more than one page.
-  create bulk page
-Add in a 5 day trend
+1. Add ability to delete entries (for mistakes)
+2. Add ability to add a days worth feeding
+3.   Split out the css and javascript so that it can be used by more than one page.
+4.   create bulk page
+5. Add in a 5 day trend
