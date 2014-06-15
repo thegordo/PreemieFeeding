@@ -85,10 +85,15 @@
 
             percentTaken *= 100;
             dailySummaryTable.innerHTML = dailySummaryTable.innerHTML +
-                    "<tr><td>"+feed.number+"</td><td>"+feed.cavagedAmount+"</td><td class='" +getPecentageClass(percentTaken) + "'>" + percentTaken.toFixed(2) +"%</td></tr>";
+                    "<tr><td>"+feed.number+"</td><td>"+feed.cavagedAmount+"</td><td class='" +getPecentageClass(percentTaken) + "'>" +
+                    percentTaken.toFixed(2) +"%</td><td><button onclick='deleteFeed("+feed.id+")'>Delete</button></td></tr>";
         }
         var displayPercent = totalPercent/result.length * 100;
         document.getElementById("dailySummary").innerHTML = "Total percent for the day: " + displayPercent.toFixed(2) + "%";
+    }
+
+    function deleteFeed(id) {
+        sendGetXmlHttpRequest("/feed?id="+id, updateDailySummary);
     }
 
     function getDailySummary() {

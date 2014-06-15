@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -46,6 +47,17 @@ public class FeedController {
   public ResponseEntity<String> saveFeeding(@RequestBody Feed feed) {
     try {
       repo.save(feed);
+      return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+    catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @RequestMapping(value = "/feed", method = RequestMethod.DELETE)
+  public ResponseEntity<String> removeFeed(@RequestParam(value = "id", required = true) long id) {
+    try {
+      repo.delete(id);
       return new ResponseEntity<>("ok", HttpStatus.OK);
     }
     catch (Exception e) {
