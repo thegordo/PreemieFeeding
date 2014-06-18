@@ -101,7 +101,28 @@ function sendGetXmlHttpRequest(url, funForResult) {
   xmlhttp.send();
 }
 
+function updateDefaultAmount(result) {
+  var input = document.getElementById("totalAmount");
+  input.value = result;
+}
+
+function setDefaultValueAmount () {
+  sendGetXmlHttpRequest("/properties?key=defaultAmount", updateDefaultAmount)
+}
+
+function updateProperty() {
+
+  var key = document.getElementById("propKey").value;
+  var value = document.getElementById("propValue").value;
+
+  var url = "/properties?key="+key+"&value="+value;
+  sendPostXmlHttpRequest(url, value, function() {
+    // Nothing to do here.
+  });
+}
+
 window.onload = function () {
   getDailySummary();
   document.getElementById("feedDate").value = convertDate(new Date());
-}
+  setDefaultValueAmount();
+};
