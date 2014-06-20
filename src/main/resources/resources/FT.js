@@ -121,8 +121,24 @@ function updateProperty() {
   });
 }
 
-window.onload = function () {
-  getDailySummary();
-  document.getElementById("feedDate").value = convertDate(new Date());
-  setDefaultValueAmount();
-};
+
+function setMenu() {
+  document.getElementById("menu").innerHTML = "" +
+    "<ul class='menu'> " +
+  "<li><a href='index.html'>Home</a></li> " +
+  "<li><a href='weightToAmount.html'>Amounts</a></li> " +
+  "<li><a href='prop.html'>Settings</a></li> " +
+  "</ul>";
+}
+
+function calculateFeedingAmount() {
+  var weight = document.getElementById("weightInput").value/10;
+  var caloricInput = document.getElementById("caloricInput").value;
+  var numberOfFeeds = document.getElementById("numFeedsInput").value;
+  var ounceToMillsConversion = 29.5735;
+
+  var dailyTotal = weight / caloricInput * ounceToMillsConversion;
+  var amount = dailyTotal / numberOfFeeds;
+
+  document.getElementById("result").innerHTML = Math.round(amount) + "ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.";
+}

@@ -1,9 +1,0 @@
-(complete ver 0.2) 1. Add ability to delete entries (for mistakes)
-2. Add ability to add a days worth feeding
-(complete ver 0.2) 3.   Split out the css and javascript so that it can be used by more than one page.
-4.   create bulk page
-5. Add in a 5 day trend
-(complete ver 0.4) 6. Add ability to set the default bottle total amount
-(complete ver 0.4) 7. Add a way to calculate how much formula/milk is needed based on weight.
-8. Add in menu to switch between pages.
-9. Add "app" before all resources so as to be able to differentiate between the pages and the resources.

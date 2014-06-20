@@ -3,8 +3,13 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Weight to Feeding Amount</title>
+    <link rel="stylesheet" href="FT.css">
+    <script src="jquery.min.js"></script>
+    <script src="FT.js"></script>
 </head>
-<body style="text-align: center">
+<body>
+    <div id="menu">
+    </div>
     <h1>Feeding Amount Calculator</h1>
     <p>The amount of food a  baby needs to intake is based on the babies weight and the caloric content of the food</p>
     <div>
@@ -17,17 +22,9 @@
         <p id="result"></p>
     </div>
     <script>
-        function calculateFeedingAmount() {
-            var weight = document.getElementById("weightInput").value/10;
-            var caloricInput = document.getElementById("caloricInput").value;
-            var numberOfFeeds = document.getElementById("numFeedsInput").value;
-            var ounceToMillsConversion = 29.5735;
-
-            var dailyTotal = weight / caloricInput * ounceToMillsConversion;
-            var amount = dailyTotal / numberOfFeeds;
-
-            document.getElementById("result").innerHTML = Math.round(amount) + "ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.";
-        }
+        window.onload = function () {
+            setMenu();
+        };
     </script>
 </body>
 </html>

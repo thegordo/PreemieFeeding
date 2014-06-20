@@ -5,7 +5,7 @@ td {
   padding: 3px;
 }
 
-th{
+th {
   border: 1px solid black;
   padding: 5px;
 }
@@ -31,4 +31,20 @@ td.good {
 
 body {
   text-align: center;
+}
+
+div#menu {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+
+}
+
+ul.menu {
+  display: inline;
+  list-style: none;
+}
+
+ul.menu li {
+  display: inherit;
 }

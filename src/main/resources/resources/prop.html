@@ -7,7 +7,9 @@
     <script src="jquery.min.js"></script>
     <script src="FT.js"></script>
 </head>
-<body style="text-align: center">
+<body>
+    <div id="menu">
+    </div>
     <h1>Feeding Tracker Properties</h1>
     <p>
         Possible Keys:
@@ -21,5 +23,11 @@
         <label for="propValue">Property Value:</label><input id="propValue" type="text">
         <input type="submit" value="Add/Update Property">
     </form>
+
+    <script>
+        window.onload = function () {
+            setMenu();
+        };
+    </script>
 </body>
 </html>

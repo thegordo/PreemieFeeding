@@ -7,6 +7,8 @@
     <script src="FT.js"></script>
 </head>
 <body>
+<div id="menu">
+</div>
 <h1>Feeding Tracker</h1>
 <div id="addFeed">
 
@@ -24,6 +26,13 @@
     </table>
     <p id="dailySummary"></p>
 </div>
-
+<script>
+    window.onload = function () {
+        setMenu();
+        getDailySummary();
+        document.getElementById("feedDate").value = convertDate(new Date());
+        setDefaultValueAmount();
+    };
+</script>
 </body>
 </html>
