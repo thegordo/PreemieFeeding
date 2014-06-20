@@ -13,7 +13,7 @@ function getPecentageClass(percentTaken) {
 function updateDailySummary(result) {
   var dailySummaryTable = document.getElementById("dailyTable");
   //var dailySummaryTable = $("#dailyTable");
-  dailySummaryTable.innerHTML = "<tr><th>Number:</th><th>Amount Cavaged:</th><th></th><th></th></tr>";
+  dailySummaryTable.innerHTML = "<tr><th class='feed'>Number:</th><th  class='feed'>Amount Cavaged:</th><th  class='feed'></th><th  class='feed'></th></tr>";
 
   var totalPercent = 0;
   var arrayLength = result.length;
@@ -24,8 +24,8 @@ function updateDailySummary(result) {
 
     percentTaken *= 100;
     dailySummaryTable.innerHTML = dailySummaryTable.innerHTML +
-      "<tr><td>"+feed.number+"</td><td>"+feed.cavagedAmount+"</td><td class='" +getPecentageClass(percentTaken) + "'>" +
-      percentTaken.toFixed(2) +"%</td><td><img src='red-delete-button.jpg' width='25px' onclick='deleteFeed("+feed.id+")' /></td></tr>";
+      "<tr><td class='feed'>"+feed.number+"</td><td class='feed'>"+feed.cavagedAmount+"</td><td class='feed " +getPecentageClass(percentTaken) + "'>" +
+      percentTaken.toFixed(2) +"%</td><td class='feed'><img src='red-delete-button.jpg' width='25px' onclick='deleteFeed("+feed.id+")' /></td></tr>";
   }
   var displayPercent = totalPercent/result.length * 100;
   document.getElementById("dailySummary").innerHTML = "Total percent for the day: " + displayPercent.toFixed(2) + "%";
