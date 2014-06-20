@@ -14,7 +14,7 @@ apply plugin: 'spring-boot'
 
 jar {
   baseName = 'FeedingTracker'
-  version = '0.3'
+  version = '0.4-SNAPSHOT'
 }
 
 repositories {

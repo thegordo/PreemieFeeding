@@ -16,7 +16,7 @@
         <li>defaultAmount</li>
     </ul>
 
-    <form onsubmit="updateProperty()">
+    <form onsubmit="updateProperty(); return false;">
         <label for="propKey">Property Key:</label><input id="propKey" type="text">
         <label for="propValue">Property Value:</label><input id="propValue" type="text">
         <input type="submit" value="Add/Update Property">
