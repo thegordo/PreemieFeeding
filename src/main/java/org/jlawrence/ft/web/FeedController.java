@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value = "/app/feed")
 public class FeedController {
 
   final FeedRepo repo;
@@ -29,7 +30,7 @@ public class FeedController {
     this.repo = repo;
   }
 
-  @RequestMapping(value = "/feed/{date}", method = RequestMethod.GET)
+  @RequestMapping(value = "{date}", method = RequestMethod.GET)
   @ResponseBody
   public ResponseEntity<List<Feed>> getFeedByDate(@PathVariable("date") String date) {
     try {
@@ -43,7 +44,7 @@ public class FeedController {
     }
   }
 
-  @RequestMapping(value = "/feed", method = RequestMethod.POST)
+  @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<String> saveFeeding(@RequestBody Feed feed) {
     try {
       repo.save(feed);
@@ -54,7 +55,7 @@ public class FeedController {
     }
   }
 
-  @RequestMapping(value = "/feed", method = RequestMethod.DELETE)
+  @RequestMapping(method = RequestMethod.DELETE)
   public ResponseEntity<String> removeFeed(@RequestParam(value = "id", required = true) long id) {
     try {
       repo.delete(id);

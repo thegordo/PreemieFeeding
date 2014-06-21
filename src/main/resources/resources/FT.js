@@ -38,7 +38,7 @@ function deleteFeed(id) {
       getDailySummary();
     }
   };
-  xmlhttp.open("DELETE", "/feed?id="+id, true);
+  xmlhttp.open("DELETE", "/app/feed?id="+id, true);
   xmlhttp.send();
 }
 
@@ -47,7 +47,7 @@ function getDailySummary() {
   if (dateInputValue == null || dateInputValue == "") {
     dateInputValue =convertDate(new Date());
   }
-  sendGetXmlHttpRequest("/feed/"+dateInputValue, updateDailySummary)
+  sendGetXmlHttpRequest("/app/feed/"+dateInputValue, updateDailySummary)
 }
 
 function convertDate(date) {
@@ -67,7 +67,7 @@ function addFeed() {
     "number": document.getElementById("feedNumber").value
   };
 
-  sendPostXmlHttpRequest("/feed",
+  sendPostXmlHttpRequest("/app/feed",
                          feed,
                          function() {
                            clearFields();
@@ -107,7 +107,7 @@ function updateDefaultAmount(result) {
 }
 
 function setDefaultValueAmount () {
-  sendGetXmlHttpRequest("/properties?key=defaultAmount", updateDefaultAmount)
+  sendGetXmlHttpRequest("/app/properties?key=defaultAmount", updateDefaultAmount)
 }
 
 function updateProperty() {
@@ -115,7 +115,7 @@ function updateProperty() {
   var key = document.getElementById("propKey").value;
   var value = document.getElementById("propValue").value;
 
-  var url = "/properties?key="+key+"&value="+value;
+  var url = "/app/properties?key="+key+"&value="+value;
   sendPostXmlHttpRequest(url, value, function() {
     // Nothing to do here.
   });

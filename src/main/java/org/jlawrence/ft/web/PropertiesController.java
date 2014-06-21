@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller()
-@RequestMapping(value = "/properties")
+@RequestMapping(value = "/app/properties")
 public class PropertiesController {
 
   private static final Logger logger = Logger.getLogger(PropertiesController.class);
