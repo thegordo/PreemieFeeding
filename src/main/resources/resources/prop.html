@@ -11,18 +11,13 @@
     <div id="menu">
     </div>
     <h1>Feeding Tracker Properties</h1>
-    <p>
-        Possible Keys:
-    </p>
-    <ul>
-        <li>defaultAmount</li>
-    </ul>
 
     <form onsubmit="updateProperty(); return false;">
-        <label for="propKey">Property Key:</label><input id="propKey" type="text">
-        <label for="propValue">Property Value:</label><input id="propValue" type="text">
+        <label for="defaultAmountVal">Default Amount:</label><input id="defaultAmountVal" type="text"><br />
         <input type="submit" value="Add/Update Property">
     </form>
+
+    <p id="result" onclick="$('#result').html('');return false;"></p>
 
     <script>
         window.onload = function () {

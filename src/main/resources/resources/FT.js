@@ -85,15 +85,19 @@ function setDefaultValueAmount () {
 
 function updateProperty() {
 
-  var key = $("#propKey").val();
-  var value = $("#propValue").val();
+  var key = "defaultAmount";
+  var value = $("#defaultAmountVal").val();
 
   var url = "/app/properties?key="+key+"&value="+value;
 
   $.ajax({
            url: url,
            type: "POST",
-           contentType: "application/json"
+           contentType: "application/json",
+           success: function() {
+             $("#result").html("Mission Completed");
+             $("#defaultAmountVal").val("");
+           }
          }
   );
 }
