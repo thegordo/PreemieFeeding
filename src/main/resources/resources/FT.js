@@ -22,6 +22,28 @@ function deleteFeed(id) {
   );
 }
 
+function submitBulkFeeds () {
+  var count = $("#numberOfFeeds").val();
+  var feedArray = [];
+  for (var index = 0; index < count; index ++) {
+    var date = $("#date").val();
+    feedArray[index] = {
+      "cavagedAmount": $("#tubeFed" + index).val(),
+      "totalAmount": $("#totalAmount" + index).val(),
+      "date": date,
+      "number": $("#bulkNumber" + index).val()
+    };
+  }
+  $.ajax({
+           url: "/app/feed/batch",
+           type: "POST",
+           contentType: "application/json",
+           data: JSON.stringify(feedArray),
+           success: function () {
+           }
+         })
+}
+
 function getDailySummary() {
   var dateInputValue = $("#feedDate").val();
   if (dateInputValue == null || dateInputValue == "") {
@@ -77,9 +99,15 @@ function addFeed() {
   );
 }
 
+function getDefaultAmount(setDefault) {
+  $.getJSON("/app/properties?key=defaultAmount", null, function updateDailySummary(data, status, xhr) {
+    setDefault(data);
+  });
+}
+
 function setDefaultValueAmount () {
-  $.getJSON("/app/properties?key=defaultAmount", null, function updateDailySummary(data, status, xhr){
-    $("#totalAmount").val(data);
+  getDefaultAmount(function(data) {
+    $("totalAmount").val(data);
   });
 }
 
@@ -102,16 +130,6 @@ function updateProperty() {
   );
 }
 
-
-function setMenu() {
-  $("#menu").html( "" +
-    "<ul class='menu'> " +
-  "<li><a href='index.html'>Home</a></li> " +
-  "<li><a href='weightToAmount.html'>Amounts</a></li> " +
-  "<li><a href='prop.html'>Settings</a></li> " +
-  "</ul>");
-}
-
 function calculateFeedingAmount() {
   var weight = $("#weightInput").val()/10;
   var caloricInput = $("#caloricInput").val();
@@ -122,4 +140,20 @@ function calculateFeedingAmount() {
   var amount = dailyTotal / numberOfFeeds;
 
   $("#result").html(Math.round(amount) + "ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.");
+}
+
+function fixEntries() {
+  var tableHtml = "<thead><tr><th>Number:</th><th>Amount Cavaged:</th><th>total Amount:</th></tr></thead>";
+  var numEntries = $("#numberOfFeeds").val();
+  for (var index =0; index < numEntries; index ++) {
+
+    tableHtml += "<tr><td><input id='bulkNumber"+ index +"' type='number' value='"+(index +1)+"'/></td><td><input id='tubeFed"
+      + index + "' type='number' /></td><td><input id='totalAmount" + index + "' class='totalAmount' type='number' /></td></tr>";
+
+    var id = "totalAmount"+index;
+  }
+  $("#feedInputs").html(tableHtml);
+  getDefaultAmount(function (data) {
+    $(".totalAmount").val(data);
+  })
 }

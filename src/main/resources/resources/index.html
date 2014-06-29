@@ -5,10 +5,11 @@
     <link rel="stylesheet" href="FT.css"  />
     <script src="jquery.min.js" ></script>
     <script src="FT.js"></script>
+    <script src="polymer/platform.js"></script>
+    <link rel="import" href="peices/menu.html" />
 </head>
 <body>
-<div id="menu">
-</div>
+<ft-menu></ft-menu>
 <h1>Feeding Tracker</h1>
 <div id="addFeed">
 
@@ -28,7 +29,6 @@
 </div>
 <script>
     window.onload = function () {
-        setMenu();
         getDailySummary();
         document.getElementById("feedDate").value = convertDate(new Date());
         setDefaultValueAmount();

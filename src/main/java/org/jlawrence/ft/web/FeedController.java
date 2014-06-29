@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 
+import org.apache.log4j.Logger;
 import org.jlawrence.ft.model.db.Feed;
 import org.jlawrence.ft.model.repo.FeedRepo;
 import org.jlawrence.ft.model.util.Serializer;
@@ -59,6 +60,20 @@ public class FeedController {
   public ResponseEntity<String> removeFeed(@RequestParam(value = "id", required = true) long id) {
     try {
       repo.delete(id);
+      return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+    catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @RequestMapping(value = "/batch", method=RequestMethod.POST)
+  public ResponseEntity<String> addFeedForAllDay(@RequestBody List<Feed> feeds) {
+    Logger.getLogger(getClass()).info(feeds);
+    try {
+      for (Feed feed : feeds) {
+        repo.save(feed);
+      }
       return new ResponseEntity<>("ok", HttpStatus.OK);
     }
     catch (Exception e) {

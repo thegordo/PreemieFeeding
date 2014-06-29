@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Feeding Tracker Bulk addition</title>
+    <link rel="stylesheet" href="FT.css">
+    <script src="jquery.min.js"></script>
+    <script src="FT.js"></script>
+    <script src="polymer/platform.js"></script>
+    <link rel="import" href="peices/menu.html"/>
+</head>
+<body>
+    <ft-menu></ft-menu>
+    <h1>Feeding Tracker Bulk Additions</h1>
+
+    <form onsubmit="submitBulkFeeds(); return false;">
+        <label for="numberOfFeeds">Number of entries:</label><input id="numberOfFeeds" type="number" onchange="fixEntries(); return false;"><br />
+        <label for="date">Date:</label><input id="date" type="date"><br />
+        <table id="feedInputs">
+        </table>
+        <input type="submit">
+    </form>
+</body>
+</html>

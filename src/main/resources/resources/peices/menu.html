@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="ft-menu">
+    <template>
+        <style>
+            div {
+                position: fixed;
+                right: 5px;
+                top: 5px;
+
+            }
+
+            ul {
+                display: inline;
+                list-style: none;
+            }
+
+            li {
+                display: inherit;
+            }
+        </style>
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>&nbsp;
+                <li><a href="../weightToAmount.html">Amounts</a></li>&nbsp;
+                <li><a href="../bulkFeed.html">Bulk upload</a></li>&nbsp;
+                <li><a href="../prop.html">Settings</a></li>&nbsp;
+            </ul>
+        </div>
+    </template>
+    <script>
+        Polymer("ft-menu");
+    </script>
+</polymer-element>
