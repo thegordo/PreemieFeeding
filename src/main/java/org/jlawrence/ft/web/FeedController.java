@@ -37,7 +37,7 @@ public class FeedController {
     try {
       Date parsed = Serializer.dateFormat.parse(date);
 
-      List<Feed> feeds = repo.findByDate(parsed);
+      List<Feed> feeds = repo.findByDateOrderByNumberAsc(parsed);
       return new ResponseEntity<>(feeds, HttpStatus.OK);
     }
     catch (ParseException e) {
