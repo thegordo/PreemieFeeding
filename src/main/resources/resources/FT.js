@@ -107,7 +107,7 @@ function getDefaultAmount(setDefault) {
 
 function setDefaultValueAmount () {
   getDefaultAmount(function(data) {
-    $("totalAmount").val(data);
+    $("#totalAmount").val(data);
   });
 }
 
