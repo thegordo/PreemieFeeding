@@ -157,3 +157,18 @@ function fixEntries() {
     $(".totalAmount").val(data);
   })
 }
+
+function setupFiveDayTrend() {
+  $.getJSON("/app/feed/fiveDay", function(data) {
+    var head = "";
+    var body = "";
+
+    for(var index = 0; index < data.length; index ++) {
+      head += "<td>"+data[index].date+"</td>"
+      body += "<td>"+data[index].percentByMouth+"</td>"
+    }
+
+    $("#header").html(head);
+    $("#body").html(body);
+  });
+}

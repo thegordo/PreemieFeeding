@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.jlawrence.ft.model.db.Feed;
+import org.jlawrence.ft.model.json.FeedSummary;
 import org.jlawrence.ft.model.repo.FeedRepo;
 import org.jlawrence.ft.model.util.Serializer;
+import org.jlawrence.ft.service.FeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/app/feed")
 public class FeedController {
 
-  final FeedRepo repo;
+  private final FeedRepo repo;
+  private final FeedService feedService;
 
   @Autowired
-  public FeedController(FeedRepo repo) {
+  public FeedController(FeedRepo repo, FeedService service) {
     this.repo = repo;
+    this.feedService = service;
   }
 
   @RequestMapping(value = "{date}", method = RequestMethod.GET)
@@ -69,7 +73,6 @@ public class FeedController {
 
   @RequestMapping(value = "/batch", method=RequestMethod.POST)
   public ResponseEntity<String> addFeedForAllDay(@RequestBody List<Feed> feeds) {
-    Logger.getLogger(getClass()).info(feeds);
     try {
       for (Feed feed : feeds) {
         repo.save(feed);
@@ -77,6 +80,19 @@ public class FeedController {
       return new ResponseEntity<>("ok", HttpStatus.OK);
     }
     catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @RequestMapping(value = "/fiveDay", method=RequestMethod.GET)
+  public ResponseEntity<List<FeedSummary>> get5DaySummary() {
+    try {
+      List<FeedSummary> feedSummaryList = feedService.getFiveDaySummary();
+
+      return new ResponseEntity<>(feedSummaryList, HttpStatus.OK);
+    }
+    catch (Exception e) {
+      Logger.getInstance(getClass()).error("couldn't get five day", e);
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

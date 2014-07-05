@@ -27,11 +27,20 @@
     </table>
     <p id="dailySummary"></p>
 </div>
+<div id="trend">
+    <table>
+        <tr id="header">
+        </tr>
+        <tr id="body">
+        </tr>
+    </table>
+</div>
 <script>
     window.onload = function () {
         getDailySummary();
         document.getElementById("feedDate").value = convertDate(new Date());
         setDefaultValueAmount();
+        setupFiveDayTrend();
     };
 </script>
 </body>
