@@ -22,5 +22,14 @@
         </form>
         <p id="result"></p>
     </div>
+    <div>
+        <form onsubmit="calculateTotalCalories(); return false;">
+            <label for="caloricContent">Caloric Content:</label><input id="caloricContent" type="number" required /><br />
+            <label for="numberOfFeeds">Number of Feeds per day:</label><input id="numberOfFeeds" type="number" required /><br />
+            <label for="bottleAmount">Number of ml in a bottle:</label><input id="bottleAmount" type="number" required /><br />
+            <input type="submit">
+        </form>
+        <p id="result2"></p>
+    </div>
 </body>
 </html>

@@ -131,15 +131,29 @@ function updateProperty() {
 }
 
 function calculateFeedingAmount() {
-  var weight = $("#weightInput").val()/10;
+  var caloriesNeed = $("#weightInput").val()/10;
   var caloricInput = $("#caloricInput").val();
   var numberOfFeeds = $("#numFeedsInput").val();
   var ounceToMillsConversion = 29.5735;
 
-  var dailyTotal = weight / caloricInput * ounceToMillsConversion;
+  var dailyTotal = caloriesNeed / caloricInput * ounceToMillsConversion;
   var amount = dailyTotal / numberOfFeeds;
 
   $("#result").html(Math.round(amount) + "ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.");
+}
+
+function calculateTotalCalories() {
+  var caloricContent = $("#caloricContent").val();
+  var numberOfFeeds = $("#numberOfFeeds").val();
+  var feedAmount = $("#bottleAmount").val();;
+  var ounceToMillsConversion = 29.5735;
+
+  var dailyTotal = (numberOfFeeds*feedAmount);
+  var totalOunces = dailyTotal/ounceToMillsConversion;
+  var totalCalories = totalOunces * caloricContent;
+
+  $("#result2").html("Total calories fed:" + Math.round(totalCalories));
+
 }
 
 function fixEntries() {
