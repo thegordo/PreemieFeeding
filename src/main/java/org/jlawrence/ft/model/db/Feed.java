@@ -21,8 +21,8 @@ public class Feed {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column
-  private Long cavagedAmount;
+  @Column(name = "cavagedAmount")
+  private Long tubeFedAmount;
 
   @Column
   private Long totalAmount;
@@ -44,12 +44,12 @@ public class Feed {
     this.id = id;
   }
 
-  public Long getCavagedAmount() {
-    return cavagedAmount;
+  public Long getTubeFedAmount() {
+    return tubeFedAmount;
   }
 
-  public void setCavagedAmount(Long cavagedAmount) {
-    this.cavagedAmount = cavagedAmount;
+  public void setTubeFedAmount(Long tubeFedAmount) {
+    this.tubeFedAmount = tubeFedAmount;
   }
 
   public Date getDate() {
@@ -80,7 +80,7 @@ public class Feed {
   public String toString() {
     return "Feed{" +
       "id=" + id +
-      ", cavagedAmount=" + cavagedAmount +
+      ", tubeFedAmount=" + tubeFedAmount +
       ", date=" + date +
       ", number=" + number +
       '}';

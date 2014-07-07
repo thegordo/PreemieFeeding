@@ -28,7 +28,7 @@ function submitBulkFeeds () {
   for (var index = 0; index < count; index ++) {
     var date = $("#date").val();
     feedArray[index] = {
-      "cavagedAmount": $("#tubeFed" + index).val(),
+      "tubeFedAmount": $("#tubeFed" + index).val(),
       "totalAmount": $("#totalAmount" + index).val(),
       "date": date,
       "number": $("#bulkNumber" + index).val()
@@ -50,16 +50,16 @@ function getDailySummary() {
     dateInputValue =convertDate(new Date());
   }
   $.getJSON("/app/feed/"+dateInputValue, null, function updateDailySummary(data, status, xhr){
-    var tableHtml = "<tr><th class='feed'>Number:</th><th  class='feed'>Amount Cavaged:</th><th  class='feed'></th><th  class='feed'></th></tr>";
+    var tableHtml = "<tr><th class='feed'>Number:</th><th  class='feed'>Amount Tube Fed:</th><th  class='feed'></th><th  class='feed'></th></tr>";
     var totalPercent = 0;
     var arrayLength = data.length;
     for (var i = 0; i < arrayLength; i++) {
       var feed = data[i];
-      var percentTaken = (feed.totalAmount - feed.cavagedAmount)/feed.totalAmount;
+      var percentTaken = (feed.totalAmount - feed.tubeFedAmount)/feed.totalAmount;
       totalPercent += percentTaken;
 
       percentTaken *= 100;
-      tableHtml += "<tr><td class='feed'>"+feed.number+"</td><td class='feed'>"+feed.cavagedAmount+"</td><td class='feed " +getPecentageClass(percentTaken) + "'>" +
+      tableHtml += "<tr><td class='feed'>"+feed.number+"</td><td class='feed'>"+feed.tubeFedAmount+"</td><td class='feed " +getPecentageClass(percentTaken) + "'>" +
         percentTaken.toFixed(2) +"%</td><td class='feed'><img src='red-delete-button.jpg' width='25px' onclick='deleteFeed("+feed.id+")' /></td></tr>";
     }
     var displayPercent = totalPercent/data.length * 100;
@@ -75,12 +75,12 @@ function convertDate(date) {
 
 function clearFields() {
   $("#feedNumber").val("");
-  $("#cavagedAmount").val("");
+  $("#tubeFedAmount").val("");
 }
 
 function addFeed() {
   var feed = {
-    "cavagedAmount": $("#cavagedAmount").val(),
+    "tubeFedAmount": $("#tubeFedAmount").val(),
     "totalAmount": $("#totalAmount").val(),
     "date": $("#feedDate").val(),
     "number": $("#feedNumber").val()
@@ -157,7 +157,7 @@ function calculateTotalCalories() {
 }
 
 function fixEntries() {
-  var tableHtml = "<thead><tr><th>Number:</th><th>Amount Cavaged:</th><th>total Amount:</th></tr></thead>";
+  var tableHtml = "<thead><tr><th>Number:</th><th>Amount Tube Fed:</th><th>total Amount:</th></tr></thead>";
   var numEntries = $("#numberOfFeeds").val();
   for (var index =0; index < numEntries; index ++) {
 

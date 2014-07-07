@@ -43,13 +43,13 @@ public class FeedService {
 
     List<FeedSummary> list = new ArrayList<>();
     for (List<Feed> feeds : feedMap.values()) {
-      int totalCavaged = 0;
+      int totalTubeFed = 0;
       int totalGiven = 0;
       for (Feed feed : feeds) {
-        totalCavaged += feed.getCavagedAmount();
+        totalTubeFed += feed.getTubeFedAmount();
         totalGiven += feed.getTotalAmount();
       }
-      double dailyPercent = Math.round(100-(((totalCavaged + 0.0)/(totalGiven + 0.0))*100));
+      double dailyPercent = Math.round(100-(((totalTubeFed + 0.0)/(totalGiven + 0.0))*100));
       list.add(new FeedSummary(feeds.get(0).getDate(), dailyPercent));
     }
     Collections.sort(list, new Comparator<FeedSummary>() {
