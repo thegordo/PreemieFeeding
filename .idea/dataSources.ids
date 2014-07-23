@@ -322,9 +322,10 @@
       <column name="ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
     </table>
     <table name="FEED" schema="PUBLIC" catalog="FEEDTRACKER" type="TABLE">
-      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfN0I2RUNGNjhfMENDQl80RjBCXzk1MUFfRUI2OEVCRDJDMDAyKQ==" autoIncrement="true"/>
+      <column name="ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfNDA3QTJFQTdfOEUyMV80RDcxX0I4RTRfNTkxNDlFQkIzM0E5KQ==" autoIncrement="true"/>
       <column name="CAVAGEDAMOUNT" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <column name="DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91"/>
+      <column name="NUMBER" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="TOTALAMOUNT" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="CONSTRAINT_2" columns="ID"/>
     </table>

@@ -6,6 +6,7 @@
     <script src="jquery.min.js" ></script>
     <script src="FT.js"></script>
     <script src="polymer/platform.js"></script>
+    <script src="Chart.min.js"></script>
     <link rel="import" href="peices/menu.html" />
 </head>
 <body>
@@ -27,14 +28,7 @@
     </table>
     <p id="dailySummary"></p>
 </div>
-<div id="trend">
-    <table>
-        <tr id="header">
-        </tr>
-        <tr id="body">
-        </tr>
-    </table>
-</div>
+<canvas id="fiveDayTrend" width="400" height="400"></canvas>
 <script>
     window.onload = function () {
         getDailySummary();

@@ -13,15 +13,33 @@
     <ft-menu></ft-menu>
     <h1>Feeding Amount Calculator</h1>
     <p>The amount of food a  baby needs to intake is based on the babies weight and the caloric content of the food</p>
+    <hr>
+    <h3>Continuous Night Feeding, Bottle During day</h3>
+    <div>
+        <form onsubmit="calculateContinuousFeedingAmount();return false;">
+            <label for="nightFeedPercentInput">Night Feed Percentage:</label><input id="nightFeedPercentInput" type="number"><br />
+            <label for="cCaloriesPerKGInput">Calories/KG</label><input id="cCaloriesPerKGInput" type="number" min="0" required /><br />
+            <label for="cWeightInput">Weight (in kilograms):</label><input id="cWeightInput" type="number" min="0" step="any" required /><br />
+            <label for="cCaloricInput">Caloric Content:</label><input id="cCaloricInput" type="number" min="0" required /><br />
+            <label for="cNumFeedsInput">Number of Feeds per day:</label><input id="cNumFeedsInput" type="number" min="1" required /><br />
+            <input type="submit">
+        </form>
+        <p id="cResult"></p>
+    </div>
+    <hr>
+    <h3>Bottle Feeding Only</h3>
     <div>
         <form onsubmit="calculateFeedingAmount();return false;">
-            <label for="weightInput">Weight (in grams):</label><input id="weightInput" type="number" required /><br />
-            <label for="caloricInput">Caloric Content:</label><input id="caloricInput" type="number" required /><br />
-            <label for="numFeedsInput">Number of Feeds per day:</label><input id="numFeedsInput" type="number" required /><br />
+            <label for="caloriesPerKGInput">Calories/KG</label><input id="caloriesPerKGInput" type="number" min="0" required /><br />
+            <label for="weightInput">Weight (in kilograms):</label><input id="weightInput" type="number" min="0" step="any" required /><br />
+            <label for="caloricInput">Caloric Content:</label><input id="caloricInput" type="number" min="0" required /><br />
+            <label for="numFeedsInput">Number of Feeds per day:</label><input id="numFeedsInput" type="number" min="1" required /><br />
             <input type="submit">
         </form>
         <p id="result"></p>
     </div>
+    <hr>
+    <h3>Total calories given per day</h3>
     <div>
         <form onsubmit="calculateTotalCalories(); return false;">
             <label for="caloricContent">Caloric Content:</label><input id="caloricContent" type="number" required /><br />

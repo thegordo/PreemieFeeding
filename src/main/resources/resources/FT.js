@@ -131,7 +131,8 @@ function updateProperty() {
 }
 
 function calculateFeedingAmount() {
-  var caloriesNeed = $("#weightInput").val()/10;
+  var caloriesPerKG = $("#caloriesPerKGInput").val();
+  var caloriesNeed = $("#weightInput").val() * caloriesPerKG;
   var caloricInput = $("#caloricInput").val();
   var numberOfFeeds = $("#numFeedsInput").val();
   var ounceToMillsConversion = 29.5735;
@@ -139,13 +140,28 @@ function calculateFeedingAmount() {
   var dailyTotal = caloriesNeed / caloricInput * ounceToMillsConversion;
   var amount = dailyTotal / numberOfFeeds;
 
-  $("#result").html(Math.round(amount) + "ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.");
+  $("#result").html(Math.round(amount) + " ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.");
+}
+
+function calculateContinuousFeedingAmount() {
+  var percentTakenAtNight = $("#nightFeedPercentInput").val()/100;
+  var caloriesPerKG = $("#cCaloriesPerKGInput").val();
+  var caloriesNeed = $("#cWeightInput").val() * caloriesPerKG;
+  var caloricInput = $("#cCaloricInput").val();
+  var numberOfFeeds = $("#cNumFeedsInput").val();
+  var ounceToMillsConversion = 29.5735;
+
+  var dailyTotal = caloriesNeed / caloricInput * ounceToMillsConversion;
+  var nightAmount = dailyTotal * percentTakenAtNight;
+  var amount = (dailyTotal-nightAmount) / numberOfFeeds;
+
+  $("#cResult").html(Math.round(amount) + " ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day. <br />" + Math.round(nightAmount) + " at night");
 }
 
 function calculateTotalCalories() {
   var caloricContent = $("#caloricContent").val();
   var numberOfFeeds = $("#numberOfFeeds").val();
-  var feedAmount = $("#bottleAmount").val();;
+  var feedAmount = $("#bottleAmount").val();
   var ounceToMillsConversion = 29.5735;
 
   var dailyTotal = (numberOfFeeds*feedAmount);
@@ -173,16 +189,33 @@ function fixEntries() {
 }
 
 function setupFiveDayTrend() {
-  $.getJSON("/app/feed/fiveDay", function(data) {
-    var head = "";
-    var body = "";
+  $.getJSON("/app/feed/fiveDay", function(sets) {
+    var labelArray = [];
+    var dataPoints = [];
 
-    for(var index = 0; index < data.length; index ++) {
-      head += "<td>"+data[index].date+"</td>"
-      body += "<td>"+data[index].percentByMouth+"</td>"
+    for(var index = 0; index < sets.length; index ++) {
+      labelArray[index] = sets[index].date;
+      dataPoints[index] = sets[index].percentByMouth;
     }
 
-    $("#header").html(head);
-    $("#body").html(body);
+    var data = {
+      labels: labelArray,
+      datasets: [
+        {
+          label: "My First dataset",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: dataPoints
+        }
+      ]
+    };
+
+    var ctx = $("#fiveDayTrend").get(0).getContext("2d");
+    new Chart(ctx).Line(data);
+
   });
 }
