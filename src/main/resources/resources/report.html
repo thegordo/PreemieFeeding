@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feeding Tracker</title>
+    <link rel="stylesheet" href="FT.css" />
+    <script src="jquery.min.js" ></script>
+    <script src="FT.js"></script>
+    <script src="polymer/platform.js"></script>
+    <script src="Chart.min.js"></script>
+    <link rel="import" href="peices/menu.html" />
+</head>
+<body>
+<ft-menu></ft-menu>
+<h1>Feeding Tracker Reports</h1>
+<form onsubmit="getReport();return false;">
+    <label for="startDate">Start Date:</label><input id="startDate" type="date"><br />
+    <label for="endDate">Start Date:</label><input id="endDate" type="date"><br />
+    <input type="submit">
+</form>
+<canvas id="reportGraph" width="600" height="600"></canvas>
+</body>
+</html>

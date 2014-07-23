@@ -96,5 +96,24 @@ public class FeedController {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @RequestMapping(value = "/report", method=RequestMethod.GET)
+  public ResponseEntity<List<FeedSummary>> getReport(
+    @RequestParam("startDate") String startDateInput,
+    @RequestParam("endDate") String endDateInput
+    ) {
+
+    try {
+      Date startDate = Serializer.dateFormat.parse(startDateInput);
+      Date endDate = Serializer.dateFormat.parse(endDateInput);
+      List<FeedSummary> feedSummaryList = feedService.getReport(startDate, endDate);
+
+      return new ResponseEntity<>(feedSummaryList, HttpStatus.OK);
+    }
+    catch (Exception e) {
+      Logger.getInstance(getClass()).error("couldn't get Report", e);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
 

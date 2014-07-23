@@ -189,11 +189,11 @@ function fixEntries() {
 }
 
 function setupFiveDayTrend() {
-  $.getJSON("/app/feed/fiveDay", function(sets) {
+  $.getJSON("/app/feed/fiveDay", function (sets) {
     var labelArray = [];
     var dataPoints = [];
 
-    for(var index = 0; index < sets.length; index ++) {
+    for(var index = 0; index < sets.length; index++) {
       labelArray[index] = sets[index].date;
       dataPoints[index] = sets[index].percentByMouth;
     }
@@ -202,7 +202,7 @@ function setupFiveDayTrend() {
       labels: labelArray,
       datasets: [
         {
-          label: "My First dataset",
+          label: "Percent Taken Orally",
           fillColor: "rgba(220,220,220,0.2)",
           strokeColor: "rgba(220,220,220,1)",
           pointColor: "rgba(220,220,220,1)",
@@ -219,3 +219,40 @@ function setupFiveDayTrend() {
 
   });
 }
+
+
+function getReport() {
+  var url = "/app/feed/report?";
+  url += "startDate=" + $("#startDate").val() + "&";
+  url += "endDate=" + $("#endDate").val();
+  $.getJSON(url, function (sets) {
+    var labelArray = [];
+    var dataPoints = [];
+
+    for(var index = 0; index < sets.length; index++) {
+      labelArray[index] = sets[index].date;
+      dataPoints[index] = sets[index].percentByMouth;
+    }
+
+    var data = {
+      labels: labelArray,
+      datasets: [
+        {
+          label: "Percent Taken Orally",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: dataPoints
+        }
+      ]
+    };
+
+    var ctx = $("#reportGraph").get(0).getContext("2d");
+    new Chart(ctx).Line(data);
+
+  });
+}
+
