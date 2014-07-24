@@ -203,9 +203,9 @@ function setupFiveDayTrend() {
       datasets: [
         {
           label: "Percent Taken Orally",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
+          fillColor: "rgba(102, 194, 133, 0.2)",
+          strokeColor: "rgba(102, 194, 133, 1.0)",
+          pointColor: "rgba(102, 194, 133, 1.0)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
@@ -239,9 +239,9 @@ function getReport() {
       datasets: [
         {
           label: "Percent Taken Orally",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
+          fillColor: "rgba(102, 194, 133, 0.2)",
+          strokeColor: "rgba(102, 194, 133, 1.0)",
+          pointColor: "rgba(102, 194, 133, 1.0)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
