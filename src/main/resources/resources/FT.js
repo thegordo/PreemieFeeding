@@ -53,6 +53,7 @@ function getDailySummary() {
     var tableHtml = "<tr><th class='feed'>Number:</th><th  class='feed'>Amount Tube Fed:</th><th  class='feed'></th><th  class='feed'></th></tr>";
     var totalPercent = 0;
     var arrayLength = data.length;
+    document.getElementById("feedNumber").value = arrayLength + 1;
     for (var i = 0; i < arrayLength; i++) {
       var feed = data[i];
       var percentTaken = (feed.totalAmount - feed.tubeFedAmount)/feed.totalAmount;
@@ -130,41 +131,77 @@ function updateProperty() {
   );
 }
 
-function calculateFeedingAmount() {
-  var caloriesPerKG = $("#caloriesPerKGInput").val();
-  var caloriesNeed = $("#weightInput").val() * caloriesPerKG;
-  var caloricInput = $("#caloricInput").val();
-  var numberOfFeeds = $("#numFeedsInput").val();
-  var ounceToMillsConversion = 29.5735;
+function calculateHydrationNeed(weight) {
+  var firstBlock = weight;
+  var secondBlock = 0;
+  var thirdBlock = 0;
+  if(weight > 10) {
+    firstBlock = 10;
+    if(weight < 20) {
+      secondBlock = weight - 10;
+    }
+  }
+  if(weight > 20) {
+    secondBlock = 10;
+    thirdBlock = weight - 20;
+  }
 
-  var dailyTotal = caloriesNeed / caloricInput * ounceToMillsConversion;
-  var amount = dailyTotal / numberOfFeeds;
-
-  $("#result").html(Math.round(amount) + " ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day.");
+  return 100 * firstBlock + 50 * secondBlock + 20 * thirdBlock;
 }
-
 function calculateContinuousFeedingAmount() {
   var percentTakenAtNight = $("#nightFeedPercentInput").val()/100;
   var caloriesPerKG = $("#cCaloriesPerKGInput").val();
-  var caloriesNeed = $("#cWeightInput").val() * caloriesPerKG;
+  var weight = $("#cWeightInput").val();
+  var caloriesNeed = weight * caloriesPerKG;
   var caloricInput = $("#cCaloricInput").val();
   var numberOfFeeds = $("#cNumFeedsInput").val();
+  var hoursOfContinuous = $("#cHoursContinuous").val();
   var ounceToMillsConversion = 29.5735;
 
   var dailyTotal = caloriesNeed / caloricInput * ounceToMillsConversion;
   var nightAmount = dailyTotal * percentTakenAtNight;
   var amount = (dailyTotal-nightAmount) / numberOfFeeds;
+  var rate = nightAmount/hoursOfContinuous;
+  var hydrationNeed = calculateHydrationNeed(weight);
+  var hNightAmount = hydrationNeed * percentTakenAtNight;
+  var hAmount =  (hydrationNeed - hNightAmount ) / numberOfFeeds;
+  var hRate = hNightAmount / hoursOfContinuous;
 
-  $("#cResult").html(Math.round(amount) + " ml per bottle.<br />" + Math.round(dailyTotal) + "ml per day. <br />" + Math.round(nightAmount) + " at night");
+
+  $("#cResult").html("Target Calories per day: " + Math.round(caloriesNeed) +
+    "<table>"+
+    "<tr>"+
+      "<th></th>"+
+      "<th>Caloric Calculations</th>"+
+      "<th>Hydration Calculations</th>"+
+    "</tr>"+
+    "<tr>"+
+        "<th>Total Daily Volume:</th>" +
+      "<td>" + Math.round(dailyTotal) + "ml </td>"+
+      "<td>" + Math.round(hydrationNeed) + "ml </td>"+
+    "</tr>"+
+    "<tr>"+
+        "<th>Milliliters per bottle:</th>"+
+      "<td>" + Math.round(amount) + "</td>"+
+      "<td>" + Math.round(hAmount) + "</td>"+
+    "</tr>"+
+    "<tr>"+
+      "<th>Night Feed:</th>"+
+      "<td>" + Math.round(nightAmount) + "(" + Math.round(rate) + " ml/hr)</td>"+
+      "<td>"  + Math.round(hNightAmount) + "(" + Math.round(hRate) + " ml/hr)</td>"+
+    "</tr>"+
+  "</table>");
+
 }
 
 function calculateTotalCalories() {
-  var caloricContent = $("#caloricContent").val();
-  var numberOfFeeds = $("#numberOfFeeds").val();
-  var feedAmount = $("#bottleAmount").val();
+  var caloricContent = Number($("#caloricContent").val());
+  var numberOfFeeds = Number($("#numberOfFeeds").val());
+  var feedAmount = Number($("#bottleAmount").val());
+  var nightFeedAmount = Number($("#nightFeedAmount").val());
   var ounceToMillsConversion = 29.5735;
 
-  var dailyTotal = (numberOfFeeds*feedAmount);
+  var dailyTotal = (numberOfFeeds*feedAmount) + nightFeedAmount;
   var totalOunces = dailyTotal/ounceToMillsConversion;
   var totalCalories = totalOunces * caloricContent;
 

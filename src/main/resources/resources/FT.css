@@ -48,3 +48,15 @@ ul.menu {
 ul.menu li {
   display: inherit;
 }
+
+label.aligned {
+  display: inline-block;
+  text-align: left;
+  width: 180px;
+}
+
+input {
+  margin-top:1px;
+  margin-bottom: 1px;
+  width:180px;
+}

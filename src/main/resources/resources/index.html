@@ -12,14 +12,14 @@
 <body>
 <ft-menu></ft-menu>
 <h1>Feeding Tracker</h1>
-<div id="addFeed">
+<div id="addFeed" style="margin-bottom: 5px">
 
     <form id="addFeedForm" onsubmit="addFeed(); return false;">
-        <label for="feedDate">Feed Date:</label><input id="feedDate" type="date" onchange="getDailySummary()"  /> <br />
-        <label for="feedNumber">Feed Number:</label><input id="feedNumber" type="number" /> <br />
-        <label for="tubeFedAmount">Tube Fed Amount:</label><input id="tubeFedAmount" type="number" /> <br />
-        <label for="totalAmount">Total Amount:</label><input id="totalAmount" type="number" value="100" /> <br />
-        <input type="submit" value="Add Feed">
+        <label class="aligned" for="feedDate">Feed Date:</label><input id="feedDate" type="date" onchange="getDailySummary()"  /> <br />
+        <label class="aligned" for="feedNumber">Feed Number:</label><input id="feedNumber" type="number" /> <br />
+        <label class="aligned" for="totalAmount">Total Amount:</label><input id="totalAmount" type="number" value="100" /> <br />
+        <label class="aligned" for="tubeFedAmount">Tube Fed Amount:</label><input id="tubeFedAmount" type="number" /> <br />
+        <input type="submit" value="Add Feed" style="margin: 2px">
     </form>
 </div>
 <div id="dailyInfo">
@@ -31,8 +31,8 @@
 <canvas id="fiveDayTrend" width="600" height="300"></canvas>
 <script>
     window.onload = function () {
+        document.getElementById("feedDate").valueAsDate = new Date();
         getDailySummary();
-        document.getElementById("feedDate").value = convertDate(new Date());
         setDefaultValueAmount();
         setupFiveDayTrend();
     };
