@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="../../FT.css">
     <ft-menu></ft-menu>
     <h1>Feeding Tracker</h1>
-    <feed-form></feed-form>
+    <feed-form id="feedForm"></feed-form>
   </template>
   <script>
     Polymer({
-
+      update : function () {
+        this.$.feedForm.update();
+      }
             });
   </script>
 </polymer-element>
