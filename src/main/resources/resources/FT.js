@@ -148,6 +148,7 @@ function calculateHydrationNeed(weight) {
 
   return 100 * firstBlock + 50 * secondBlock + 20 * thirdBlock;
 }
+
 function calculateContinuousFeedingAmount() {
   var percentTakenAtNight = $("#nightFeedPercentInput").val()/100;
   var caloriesPerKG = $("#cCaloriesPerKGInput").val();

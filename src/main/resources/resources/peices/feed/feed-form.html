@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="dailyFeed-table.html" />
+
+<polymer-element name="feed-form">
+  <template>
+    <link rel="stylesheet" href="../../FT.css" />
+    <form id="addFeedForm" on-submit="{{addFeed}}">
+      <label class="aligned" for="feedDate">Feed Date:</label><input id="feedDate" type="date" value="{{feedDate}}"/> <br />
+      <label class="aligned" for="feedNumber">Feed Number:</label><input id="feedNumber" type="number" /> <br />
+      <label class="aligned" for="totalAmount">Total Amount:</label><input id="totalAmount" type="number" value="{{defaultAmount}}" /> <br />
+      <label class="aligned" for="tubeFedAmount">Tube Fed Amount:</label><input id="tubeFedAmount" type="number" /> <br />
+      <paper-button on-click="{{clickSubmit}}">Add Feed</paper-button>
+      <input id="feedFormSubmit" type="submit" hidden>
+    </form>
+    <dailyFeed-table feedDate="{{feedDate}}"></dailyFeed-table>
+    <core-ajax id="defaultAmount" url="/app/properties?key=defaultAmount"  handleas="text" method="GET" hidden response="{{defaultAmount}}"></core-ajax>
+    <core-ajax id="addFeedAjax" url="/app/feed"  handleas="json" contentType="application/json" method="POST" hidden on-core-response="{{cleanUp}}"></core-ajax>
+  </template>
+  <script>
+    Polymer({
+      defaultAmount:0,
+      feedDate:new Date().toJSON(),
+
+      clickSubmit : function() {
+        this.$.feedFormSubmit.click();
+      },
+
+      cleanUp : function () {
+        getDailySummary();
+        this.$.feedNumber.value = "";
+        this.$.tubeFedAmount.value = "";
+      },
+
+      addFeed : function() {
+        var feed = {
+          "tubeFedAmount": this.$.tubeFedAmount.value,
+          "totalAmount": this.$.totalAmount.value,
+          "date": this.$.feedDate.value,
+          "number": this.$.feedNumber.value
+        };
+
+        var ajax = this.$.addFeedAjax;
+        ajax.body = JSON.stringify(feed);
+        ajax.go();
+      },
+
+      ready : function () {
+        this.$.feedDate.valueAsDate = new Date();
+
+      }
+    })
+  </script>
+</polymer-element>
+
