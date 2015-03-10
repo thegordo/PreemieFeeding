@@ -14,7 +14,7 @@
       <input id="feedFormSubmit" type="submit" hidden>
     </form>
     <dailyFeed-table feedDate="{{feedDate}}"></dailyFeed-table>
-    <core-ajax id="defaultAmount" url="/app/properties?key=defaultAmount"  handleas="text" method="GET" hidden response="{{defaultAmount}}"></core-ajax>
+    <core-ajax id="defaultAmountAjax" url="/app/properties?key=defaultAmount"  handleas="text" method="GET" hidden response="{{defaultAmount}}"></core-ajax>
     <core-ajax id="addFeedAjax" url="/app/feed"  handleas="json" contentType="application/json" method="POST" hidden on-core-response="{{cleanUp}}"></core-ajax>
   </template>
   <script>
@@ -47,7 +47,7 @@
 
       ready : function () {
         this.$.feedDate.valueAsDate = new Date();
-
+        this.$.defaultAmountAjax.go();
       }
     })
   </script>
