@@ -13,7 +13,7 @@
       <paper-button on-click="{{clickSubmit}}">Add Feed</paper-button>
       <input id="feedFormSubmit" type="submit" hidden>
     </form>
-    <dailyFeed-table feedDate="{{feedDate}}"></dailyFeed-table>
+    <dailyFeed-table id="feedTable" feedDate="{{feedDate}}"></dailyFeed-table>
     <core-ajax id="defaultAmountAjax" url="/app/properties?key=defaultAmount"  handleas="text" method="GET" hidden response="{{defaultAmount}}"></core-ajax>
     <core-ajax id="addFeedAjax" url="/app/feed"  handleas="json" contentType="application/json" method="POST" hidden on-core-response="{{cleanUp}}"></core-ajax>
   </template>
@@ -27,7 +27,7 @@
       },
 
       cleanUp : function () {
-        getDailySummary();
+        this.$.feedTable.update();
         this.$.feedNumber.value = "";
         this.$.tubeFedAmount.value = "";
       },
